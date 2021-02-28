@@ -1,0 +1,52 @@
+﻿<div id="scoreBetModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4 class="header">ĐẶT KÈO THEO TỈ SỐ</h4>
+        <h5 class="header">COMING SOON</h5>
+        @*<span id="scoreBet_teamInfo"></span>
+        <h5 class="header">Chọn các tỉ số mà bạn muốn đặt cược</h5>
+        <h6 class="header">(hiện tại số tiền cược là cố định <b>10.000 đ/ 1 tỉ số</b>)</h6>
+        <br />
+        <div class="row">
+            <div class="col s3 offset-s3 left-align">
+                <label>
+                    <input type="checkbox" class="filled-in" />
+                    <span class="scoreBet_scores">0 - 0</span>&nbsp;&nbsp;<span class="scoreBet_paidRate">(1 ăn 3.5)</span>
+                </label>
+            </div>
+            <div class="col s3 offset-s1 left-align">
+                <label>
+                    <input type="checkbox" class="filled-in" />
+                    <span class="scoreBet_scores">1 - 1</span>&nbsp;&nbsp;<span class="scoreBet_paidRate">(1 ăn 4.1)</span>
+                </label>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col s12 input-field">
+                <i class="material-icons prefix">attach_money</i>
+                <input id="teamBet_userBalance" type="text" value="0 đ" disabled>
+                <label for="teamBet_userBalance">Số dư tài khoản</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 input-field">
+                <i class="material-icons prefix">attach_money</i>
+                <input id="teamBet_betAmount" type="text" value="0 đ" disabled>
+                <label for="teamBet_betAmount">Số tiền đã đặt</label>
+            </div>
+        </div>
+        <div class="row" id="teamBet_statusArea">
+            <div class="col s12">
+                <i class="material-icons" id="teamBet_statusIcon"></i>
+                <span id="teamBet_betStatusMessage"></span>
+            </div>
+        </div>*@
+    </div>
+    <div class="modal-footer">
+        @*<a href="#!" class="modal-close waves-effect waves-green btn">Đặt kèo</a>*@
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Đóng</a>
+    </div>
+    <!--Hidden field-->
+    <input type="hidden" id="userBalance" value="@Model.Balance" />
+</div>
+

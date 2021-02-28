@@ -1,0 +1,49 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "Admin Page";
+}
+
+<div>
+    <h4>Admin Page</h4><br />
+    <table class="table table-bordered" style="width:400px;">
+        <tr>
+            <th>
+                Tài khoản
+            </th>
+            <th>
+                Giao dịch
+            </th>
+            <th>
+                Giải đấu
+            </th>
+        </tr>
+        <tr>
+            <td>
+                <a href="/Admin/CreateAccount" class="btn btn-success">Tạo tài khoản</a>
+                <br />
+                <br />
+                <a href="/Admin/CreateMultiAccounts" class="btn btn-success">Tạo nhiều tài khoản</a>
+                <br />
+                <br />
+                <a href="/Admin/ResetPassword" class="btn btn-success">Reset password</a>
+            </td>
+            <td>
+                <a href="/Admin/ListUserBalance" class="btn btn-primary">Danh sách user</a>
+                <br />
+                <br />
+                <a href="/Admin/MakeTransaction?type=1" class="btn btn-primary">Nạp tiền</a>
+                <br />
+                <br />
+                <a href="/Admin/MakeTransaction?type=2" class="btn btn-primary">Rút tiền</a>
+                @*<br />
+                <br />
+                <a href="/Admin/TransactionHistory" class="btn btn-primary">Lịch sử giao dịch</a>*@
+            </td>
+            <td>
+                <a href="/Admin/ListMatches" class="btn btn-danger">Cập nhật trận đấu</a>
+            </td>
+        </tr>
+    </table>
+</div>
+

@@ -1,0 +1,58 @@
+﻿@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>Đăng nhập - INS1 World Cup Bet</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="~/Content/css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="~/Content/css/custom/login.css" rel="stylesheet" />
+    <link rel="icon" type="image/png" href="~/Content/images/favicon.png">
+</head>
+<body>
+    <img src="~/Content/images/background.jpg" class="background-image"/>
+    <div class="container top-50">
+        <div class="row center">
+            <div class="col s12 m8 offset-m2 l6 offset-l3">
+                <div class="card z-depth-5">
+
+                    @using (Html.BeginForm(new { id = "login-frm"}))
+                    {
+                        <div class="card-content">
+                            <div class="card-title center primary-text-color">Đăng nhập</div>
+                            <div class="row">
+                                <div class="col s12 input-field">
+                                    <i class="material-icons prefix">person</i>
+                                    <input id="username" type="text" name="username">
+                                    <label for="username">Tên đăng nhập</label>
+                                </div>
+                                <div class="col s12 input-field">
+                                    <i class="material-icons prefix">lock</i>
+                                    <input id="password" type="password" name="password">
+                                    <label for="password">Mật khẩu</label>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col s6">
+                                    <a href="/Home/Index" class="btn full-width grey">Về trang chủ</a>
+                                </div>
+                                <div class="col s6">
+                                    <input type="button" id="login-btn" href="index.html" class="btn full-width" value="Đăng nhập" />
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  Scripts-->
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.js"></script>
+    <script src="~/Scripts/js/custom/login.js"></script>
+</body>
+</html>

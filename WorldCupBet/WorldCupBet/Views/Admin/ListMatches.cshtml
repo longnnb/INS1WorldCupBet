@@ -1,0 +1,169 @@
+﻿@model IEnumerable<Entities.ViewModels.MatchViewModel>
+
+@{
+    ViewBag.Title = "ListMatches";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Danh sách trận đấu</h2>
+
+<table class="table table-bordered table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MatchId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MatchRound)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MatchTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Team1Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Team2Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Score1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Score2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Odds1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Odds2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaidRate1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaidRate2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WinTeam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnderOverGoals)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnderOverPaidRate1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnderOverPaidRate2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnderOverResult)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsStarted)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsFinished)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsBetLocked)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatchId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatchRound)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MatchTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Team1Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Team2Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Score1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Score2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Odds1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Odds2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaidRate1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PaidRate2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WinTeam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnderOverGoals)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnderOverPaidRate1)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnderOverPaidRate2)
+            </td>
+
+            @if (item.UnderOverResult == 1)
+            {
+                <td>
+                    Xỉu
+                </td>
+            }
+            else if (item.UnderOverResult == 2)
+            {
+                <td>
+                    Tài
+                </td>
+            }
+            else if (item.UnderOverResult == 0)
+            {
+                <td>
+                    Hoà
+                </td>
+            }
+            else
+            {
+                <td></td>
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.IsStarted)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsFinished)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsBetLocked)
+            </td>
+            <td>
+                @Html.ActionLink("Chỉnh sửa", "EditMatch", new { matchId = item.MatchId })
+            </td>
+            <td>
+                @if (item.WinTeam == null)
+                {
+                    @Html.ActionLink("Trả tiền kèo", "PayBet", new { matchId = item.MatchId })
+                }
+                else
+                {
+                    <span>Đã trả tiền kèo</span>
+                }
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,164 @@
+﻿@model Entities.ViewModels.HomeViewModel
+@using Entities.ViewModels
+
+@{
+    ViewBag.Title = "Trang chủ";
+    int numberOfDays = 5; //number of days show in home page
+    int numberOfPreviousDays = 1; //number of previous days show in home page, 1 for showing from yesterday
+    List<Tuple<IEnumerable<MatchViewModel>, string>> matchesList = new List<Tuple<IEnumerable<MatchViewModel>, string>>();
+
+    for (int i = 0; i < numberOfDays; i++)
+    {
+        int daysToAdded = i - numberOfPreviousDays; //get previous days
+        var matches = Model.Matches.Where(x => x.MatchTime.Date == DateTime.Now.AddDays(daysToAdded).Date);
+        var matchDate = DateTime.Now.AddDays(daysToAdded).Date;
+        string matchWeekDay = string.Empty;
+        switch (matchDate.DayOfWeek)
+        {
+            case DayOfWeek.Monday:
+                matchWeekDay = string.Format("Thứ 2, ngày {0}", matchDate.ToString("dd/MM/yyyy"));
+                break;
+            case DayOfWeek.Tuesday:
+                matchWeekDay = string.Format("Thứ 3, ngày {0}", matchDate.ToString("dd/MM/yyyy"));
+                break;
+            case DayOfWeek.Wednesday:
+                matchWeekDay = string.Format("Thứ 4, ngày {0}", matchDate.ToString("dd/MM/yyyy"));
+                break;
+            case DayOfWeek.Thursday:
+                matchWeekDay = string.Format("Thứ 5, ngày {0}", matchDate.ToString("dd/MM/yyyy"));
+                break;
+            case DayOfWeek.Friday:
+                matchWeekDay = string.Format("Thứ 6, ngày {0}", matchDate.ToString("dd/MM/yyyy"));
+                break;
+            case DayOfWeek.Saturday:
+                matchWeekDay = string.Format("Thứ 7, ngày {0}", matchDate.ToString("dd/MM/yyyy"));
+                break;
+            case DayOfWeek.Sunday:
+                matchWeekDay = string.Format("Chủ nhật, ngày {0}", matchDate.ToString("dd/MM/yyyy"));
+                break;
+        }
+        matchesList.Add(new Tuple<IEnumerable<MatchViewModel>, string>(matches, matchWeekDay));
+    }
+}
+
+<div class="section no-pad-bot">
+    <div class="container">
+        <div class="carousel carousel-slider center">
+            <div class="carousel-item red white-text" href="#one!">
+                <img src="~/Content/images/banner.jpg" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title"><strong>LỊCH THI ĐẤU</strong></span>
+            <br>
+            @foreach (var matches in matchesList)
+            {
+                if (matches.Item1.Count() > 0)
+                {
+                    <div class="row">
+                        <div class="col s12">
+                            <h5>@matches.Item2</h5>
+                            <table class="striped highlight responsive-table">
+                                <thead>
+                                    <tr>
+                                        <th class="matchTimeHeader">Giờ</th>
+                                        <th class="matchRoundHeader">Lượt trận</th>
+                                        <th class="team1Header"></th>
+                                        <th class="scoreHeader">Kèo chấp<br />Tỉ số</th>
+                                        <th class="team2Header"></th>
+                                        <th class="underOverHeader">Tài Xỉu</th>
+                                        <th class="betHeader">Đặt kèo</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in matches.Item1)
+                                    {
+                                        <tr>
+                                            <td>@item.MatchTime.ToString("HH:mm")</td>
+                                            <td>@item.MatchRound</td>
+                                            <td class="team1">
+                                                @item.Team1Name
+                                                <img src='@string.Format("/Content/images/flags/{0}.png", item.Team1Code)' class="teamFlag" />
+                                            </td>
+                                            <td class="score"><span class="odds">@item.Odds1 : @item.Odds2</span><br /><span class="detailScore">@item.Score1 - @item.Score2</span></td>
+                                            <td class="team2">
+                                                <img src='@string.Format("/Content/images/flags/{0}.png", item.Team2Code)' class="teamFlag" />
+                                                @item.Team2Name
+                                            </td>
+                                            <td class="underOver">@item.UnderOverGoals</td>
+                                            @if (item.IsFinished)
+                                            {
+                                                <td class="center">
+                                                    <button class="btn-flat disabled" disabled>Đã kết thúc</button>
+                                                    @if (Model.UserId != 0)
+                                                    {
+                                                        <br />
+                                                        <a class="btn-flat modal-trigger" href="#teamBetModal" onclick="showTeambetModal(@item.MatchId)">Trận</a>
+                                                        @*<a class="btn-flat modal-trigger" href="#scoreBetModal">Tỉ số</a>*@
+                                                        <a class="btn-flat modal-trigger" href="#underOverBetModal" onclick="showUnderOverBetModal(@item.MatchId)">Tài xỉu</a>
+                                                    }
+                                                </td>
+                                            }
+                                            else if (item.IsStarted)
+                                            {
+                                                <td class="center">
+                                                    <button class="btn-flat disabled" disabled>Hết hạn đặt kèo</button>
+                                                    @if (Model.UserId != 0)
+                                                    {
+                                                        <br />
+                                                        <a class="btn-flat modal-trigger" href="#teamBetModal" onclick="showTeambetModal(@item.MatchId)">Trận</a>
+                                                        @*<a class="btn-flat modal-trigger" href="#scoreBetModal">Tỉ số</a>*@
+                                                        <a class="btn-flat modal-trigger" href="#underOverBetModal" onclick="showUnderOverBetModal(@item.MatchId)">Tài xỉu</a>
+                                                    }
+                                                </td>
+                                            }
+                                            else if (item.IsBetLocked)
+                                            {
+                                                <td class="center">
+                                                    <button class="btn-flat disabled" disabled>Chưa mở đặt kèo</button>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td class="center">
+                                                    <a class="btn btn-small modal-trigger" href="#teamBetModal" onclick="showTeambetModal(@item.MatchId)">Trận</a>&nbsp;
+                                                    @*<a class="btn btn-small modal-trigger" href="#scoreBetModal">Tỉ số</a>&nbsp;*@
+                                                    <a class="btn btn-small modal-trigger" href="#underOverBetModal" onclick="showUnderOverBetModal(@item.MatchId)">Tài xỉu</a>
+                                                </td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <br>
+                }
+            }
+        </div>
+    </div>
+</div>
+<input type="hidden" value="@Model.Balance" id="userBalance" />
+<input type="hidden" value="@Model.UserId" id="userId" />
+<!-- Bet Modals-->
+@{
+    Html.RenderPartial("_TeamBet");
+    Html.RenderPartial("_ScoreBet");
+    Html.RenderPartial("_UnderOverBet");
+}
+<!--End Modal-->
+<br /><br />
+@section styles{
+    <link href="~/Content/css/custom/index.css" rel="stylesheet" />
+    <link href="~/Content/css/custom/customIndex.css" rel="stylesheet" />
+}
+@section scripts{
+    <script>
+        var matches = @Html.Raw(Json.Encode(Model.Matches));
+    </script>
+    <script src="~/Scripts/js/custom/index.js"></script>
+}

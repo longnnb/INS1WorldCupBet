@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Entities.ViewModels.TransactionViewModel>
+
+@{
+    ViewBag.Title = "ListUserBalance";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    #myInput {
+        background-image: url('../../Content/images/searchicon.png'); /* Add a search icon to input */
+        background-position: 8px 10px; /* Position the search icon */
+        background-repeat: no-repeat; /* Do not repeat the icon image */
+        width: 100%; /* Full-width */
+        font-size: 16px; /* Increase font-size */
+        padding: 10px 20px 10px 40px; /* Add some padding */
+        border: 1px solid #ddd; /* Add a grey border */
+        margin-top: 10px;
+        margin-bottom: 12px; /* Add some space below the input */
+    }
+</style>
+<h2>Danh sách người dùng</h2>
+<div>
+    <a href="/" class="btn btn-default">Home Page</a>&nbsp;
+    <a href="/Admin/AdminIndex" class="btn btn-default">Admin Page</a>&nbsp;
+    <a href="/Admin/CreateAccount" class="btn btn-default">Create Account</a>
+</div>
+
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search usernames...">
+
+<table class="table table-striped" id="myTable">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Username)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Fullname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Balance)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Username)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fullname)
+            </td>
+            <td>
+                @item.Balance.ToString("N0", System.Globalization.CultureInfo.CreateSpecificCulture("vi-VN"))
+            </td>
+            <td>
+                @Html.ActionLink("Nạp tiền", "MakeTransaction", new { type = 1, username = item.Username }) &nbsp;|&nbsp;
+                @Html.ActionLink("Rút tiền", "MakeTransaction", new { type = 2, username = item.Username }) &nbsp;|&nbsp;
+                @Html.ActionLink("Chỉnh sửa", "EditUser", new { userId = item.UserId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<script>
+    function myFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i;
+        input = document.getElementById("myInput");
+        filter = input.value.trim().toLowerCase();
+        table = document.getElementById("myTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 1; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[1];
+            if (td) {
+                if (td.innerHTML.toLowerCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @*<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet">*@
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link href="~/Content/css/custom/main.css" rel="stylesheet" />
+</head>
+<body>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    <div style="margin: 20px">
+        @RenderBody()
+    </div>
+    <hr />
+    <div style="margin: 20px">
+        <a href="/" class="btn btn-default">Home Page</a>&nbsp;
+        <a href="/Admin/AdminIndex" class="btn btn-default">Admin Page</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+﻿<div id="underOverBetModal" class="modal modal-fixed-footer">
+    <div class="modal-content">
+        <h4 class="header">ĐẶT KÈO TÀI XỈU</h4>
+        <span id='underOverBet_teamInfo'></span>
+        <h5 class="header">
+            <strong>KÈO TÀI XỈU:</strong> &nbsp;
+            <span id="underOverBet_BetGoals" push-data="underOverBet_BetGoals"></span>
+        </h5>
+        <h6 class="header underOverBet_explainRule">Chọn <b>XỈU</b> nếu muốn cược tống số bàn thắng <b>NHỎ</b> hơn <b push-data="underOverBet_BetGoals"></b>.</h6>
+        <h6 class="header underOverBet_explainRule">Chọn <b>TÀI</b> nếu muốn cược tống số bàn thắng <b>LỚN</b> hơn <b push-data="underOverBet_BetGoals"></b>.</h6>
+        <div class="row">
+            <div class="col s12 input-field">
+                <h5 class="header">CHỌN KÈO</h5>
+                <div class="col s12 m6">
+                    <label>
+                        <input name="BetSide" type="radio" value="1" />
+                        <span id="underOverBet_under">XỈU</span>
+                    </label>
+                    <h5 class="header" id="underOverBet_paidRate1"></h5>
+                </div>
+                <div class="col s12 m6">
+                    <label>
+                        <input name="BetSide" type="radio" value="2" />
+                        <span id="underOverBet_over">TÀI</span>
+                    </label>
+                    <h5 class="header" id="underOverBet_paidRate2"></h5>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 input-field">
+                <i class="material-icons prefix">attach_money</i>
+                <input id="underOverBet_userBalance" type="text" value="0 đ" disabled>
+                <label for="underOverBet_userBalance">Số dư tài khoản</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col s12 input-field">
+                <i class="material-icons prefix">attach_money</i>
+                <input id="underOverBet_betAmount" type="text" name="BetAmount" maxlength="7">
+                <label for="underOverBet_betAmount">Số tiền đặt kèo (10.000 - 300.000 đ)</label>
+            </div>
+        </div>
+        <div class="row" id="underOverBet_statusArea">
+            <div class="col s12">
+                <i class="material-icons" id="underOverBet_statusIcon"></i>
+                <span id="underOverBet_betStatusMessage"></span>
+            </div>
+        </div>
+    </div>
+    <!--hidden values-->
+    <input type="hidden" id="underOverBet_matchId" name="MatchId" />
+    <input type="hidden" id="underOverBet_betStatus" name="BetStatus" />
+    <div class="modal-footer">
+        <button id="underOverBet_betBtn" class="waves-effect waves-green btn">Đặt kèo<i class="material-icons right">send</i></button>
+        <button id="underOverBet_closeBtn" class="modal-close waves-effect waves-green btn-flat">Đóng</button>
+    </div>
+</div>
+

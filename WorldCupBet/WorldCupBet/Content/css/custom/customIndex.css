@@ -1,0 +1,145 @@
+﻿.team1, .team2 {
+    font-weight: bold;
+    font-size: 23px;
+    color: firebrick;
+    font-family: 'Jura', sans-serif;
+}
+
+
+.odds {
+    color: blue;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Alegreya Sans SC', sans-serif;
+}
+
+.detailScore {
+    font-weight: bold;
+    font-size: 23px;
+    font-family: 'Alegreya Sans SC', sans-serif;
+}
+
+.paidRate1, .paidRate2 {
+    display: none;
+}
+
+.teamFlag {
+    max-height: 15px;
+}
+
+.matchRoundHeader, .matchTimeHeader {
+    width: 8%;
+}
+
+.scoreHeader {
+    width: 13%;
+    text-align: center;
+}
+
+.betHeader {
+    width: 23%;
+    text-align: center;
+}
+
+.team1Header, .team2Header {
+    width: 21%;
+}
+
+.underOverHeader {
+    width: 6%;
+    text-align: center;
+}
+
+.underOver {
+    color: blue;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    text-align: center;
+}
+
+th {
+    font-family: 'Alegreya Sans SC', sans-serif;
+    font-size: large;
+}
+
+.container {
+    width: 80%;
+}
+
+.card-title {
+    text-align: center;
+}
+
+/*TeamBet Css*/
+.modal-content {
+    text-align: center;
+}
+
+.header {
+    font-family: 'Alegreya Sans SC', sans-serif;
+}
+
+#teamBet_teamInfo, #underOverBet_teamInfo {
+    font-weight: bold;
+    font-size: 28px;
+}
+
+#teamBet_Odds  {
+    font-size: 28px;
+    font-weight: bold;
+    color: darkblue;
+    font-family: 'Alegreya Sans SC', sans-serif;
+}
+
+#underOverBet_BetGoals {
+    font-size: 31px;
+    font-weight: bold;
+    color: darkblue;
+    font-family: 'Alegreya Sans SC', sans-serif;
+}
+
+#teamBet_team1, #teamBet_team2 {
+    font-weight: bold;
+    font-size: 24px;
+}
+
+#underOverBet_under, #underOverBet_over {
+    font-weight: bold;
+    font-size: 26px;
+}
+
+#teamBet_teamInfo, #teamBet_team1, #teamBet_team2, #underOverBet_teamInfo, #underOverBet_under, #underOverBet_over {
+    color: firebrick;
+    font-family: 'Jura', sans-serif;
+}
+
+#teamBet_statusArea, #underOverBet_statusArea {
+    font-family: 'Lemonada', cursive;
+    font-size: x-large;
+    color: darkcyan;
+    font-family: 'Patrick Hand SC', cursive;
+}
+
+.teamBet_teamFlag {
+    max-height: 20px;
+}
+
+.scoreBet_scores {
+    font-size: 1.5rem !important;
+    font-weight: bold;
+    color: darkblue;
+    font-family: 'Alegreya Sans SC', sans-serif;
+}
+
+.scoreBet_paidRate {
+    font-size: 1.5rem !important;
+    font-weight: normal;
+    color: darkred;
+    font-family: 'Alegreya Sans SC', sans-serif;
+}
+
+.underOverBet_explainRule {
+    margin-top: 15px;
+}
+/*End TeamBet Css*/

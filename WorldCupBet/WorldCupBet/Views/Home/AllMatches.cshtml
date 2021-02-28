@@ -1,0 +1,139 @@
+﻿@model Entities.ViewModels.HomeViewModel
+
+@{
+    ViewBag.Title = "Lịch thi đấu";
+    var previousDay = DateTime.Now.AddDays(-1);
+    var today = DateTime.Now;
+    var nextDay = DateTime.Now.AddDays(1);
+    string previousDayWeekDay = string.Empty;
+    string todayWeekDay = string.Empty;
+    string nextDayWeekDay = string.Empty;
+
+    var previousDayMatches = Model.Matches.Where(x => x.MatchTime.Date == previousDay.Date);
+    var todayMatches = Model.Matches.Where(x => x.MatchTime.Date == today.Date);
+    var nextDayMatches = Model.Matches.Where(x => x.MatchTime.Date == nextDay.Date);
+
+    switch (previousDay.DayOfWeek)
+    {
+        case DayOfWeek.Monday:
+            previousDayWeekDay = "Thứ 2";
+            todayWeekDay = "Thứ 3";
+            nextDayWeekDay = "Thứ 4";
+            break;
+        case DayOfWeek.Tuesday:
+            previousDayWeekDay = "Thứ 3";
+            todayWeekDay = "Thứ 4";
+            nextDayWeekDay = "Thứ 5";
+            break;
+        case DayOfWeek.Wednesday:
+            previousDayWeekDay = "Thứ 4";
+            todayWeekDay = "Thứ 5";
+            nextDayWeekDay = "Thứ 6";
+            break;
+        case DayOfWeek.Thursday:
+            previousDayWeekDay = "Thứ 5";
+            todayWeekDay = "Thứ 6";
+            nextDayWeekDay = "Thứ 7";
+            break;
+        case DayOfWeek.Friday:
+            previousDayWeekDay = "Thứ 6";
+            todayWeekDay = "Thứ 7";
+            nextDayWeekDay = "Chủ nhật";
+            break;
+        case DayOfWeek.Saturday:
+            previousDayWeekDay = "Thứ 2";
+            todayWeekDay = "Thứ 3";
+            nextDayWeekDay = "Thứ 4";
+            break;
+        case DayOfWeek.Sunday:
+            previousDayWeekDay = "Chủ nhật";
+            todayWeekDay = "Thứ 2";
+            nextDayWeekDay = "Thứ 3";
+            break;
+    }
+}
+<style>
+    .team1, .team2 {
+        font-weight: bold;
+        font-size: x-large;
+        color: firebrick;
+        font-family: 'Jura', sans-serif;
+    }
+
+
+    .odds {
+        color: blue;
+        font-size: 22px;
+        font-weight: bold;
+        font-family: 'Alegreya Sans SC', sans-serif;
+    }
+
+    .detailScore {
+        font-weight: bold;
+        font-size: 27px;
+        font-family: 'Alegreya Sans SC', sans-serif;
+    }
+
+    .paidRate1, .paidRate2 {
+        display: none;
+    }
+
+    .teamFlag {
+        max-height: 15px;
+    }
+    /*.round {
+        white-space: nowrap;
+    }*/
+</style>
+<input type="hidden" value="@Model.Balance" id="userBalance" />
+<input type="hidden" value="@Model.UserId" id="userId" />
+<div class="container">
+    <div class="card">
+        <div class="card-content">
+            <span class="card-title">Lịch thi đấu</span>
+            <br>
+
+            <div class="row">
+                <div class="col s12">
+                    <table class="striped highlight responsive-table">
+                        <thead>
+                            <tr>
+                                <th class="time" style="width:10%">Giờ</th>
+                                <th class="round" style="width:15%">Lượt trận</th>
+                                <th class="team1" style="width:25%"></th>
+                                <th class="score" style="width:25%">Tỉ số</th>
+                                <th class="team2" style="width:25%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Matches)
+                            {
+                                <tr>
+                                    <td>@item.MatchTime.ToString("HH:mm")</td>
+                                    <td>@item.MatchRound</td>
+                                    <td class="team1">
+                                        @item.Team1Name
+                                        <img src='@string.Format("/Content/images/flags/{0}.png", item.Team1Code)' class="teamFlag" />
+                                    </td>
+                                    <td class="score"><span class="detailScore">@item.Score1 - @item.Score2</span></td>
+                                    <td class="team2">
+                                        <img src='@string.Format("/Content/images/flags/{0}.png", item.Team2Code)' class="teamFlag" />
+                                        @item.Team2Name
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+<br /><br />
+@section styles{
+    <link href="~/Content/css/custom/index.css" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/Scripts/js/custom/index.js"></script>
+}
